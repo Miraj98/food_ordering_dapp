@@ -133,6 +133,7 @@ contract FoodOrdering {
     }
     
     function getContractBalance() public returns(uint) {
+        require(msg.sender == owner);
         return this.balance;
     }
     
@@ -142,11 +143,6 @@ contract FoodOrdering {
             totalAmount += prices[foodItem_list[i]]*_quantity[i];
         }
         return totalAmount;
-    }
-
-    modifier ownerOnly() {
-        require (msg.sender == owner);
-        _;
     }
 
 }
