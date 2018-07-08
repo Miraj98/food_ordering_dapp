@@ -1,6 +1,3 @@
-/*
-    (1) During payout the consumer has to pay for the transaction fee again
-*/
 
 
 pragma solidity ^0.4.24;
