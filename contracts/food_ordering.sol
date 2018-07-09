@@ -13,6 +13,7 @@ contract FoodOrdering {
     
     mapping (address => uint256) numberof_orders; //Keeps track of thow many food items the user ordered.
     mapping (uint256 => uint256) public prices; //This mapping represents a "digital menu card". Every food item mapped to its price.
+    mapping (address => uint256) startTime; //To track time since a customer has placed an order.
 
     foodItem[] public pending_orders; //Keeps a track of current pending orders.
     foodItem[] public completed_orders; //Keeps a track of orders prepared but not yet confirmed by the customer as reached/delivered to them. 
@@ -73,6 +74,7 @@ contract FoodOrdering {
         uint256 _totalAmount = billAmount(foodItem_list, _quantity);
         require (msg.value == 2*_totalAmount);
         numberof_orders[msg.sender] = foodItem_list.length;
+        startTime[msg.sender] = now;
         for (uint i = 0; i < foodItem_list.length; i++) {
             pending_orders.push(foodItem({
                 foodID: foodItem_list[i],
